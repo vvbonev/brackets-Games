@@ -32,8 +32,9 @@ function update() {
 function draw() {
          for(var i = 0;i < 2;i ++){
          context.fillStyle = "red"
-                  context.fillRect(X[i],Y[i],10,10)
-                  if(areColliding(X[i],Y[i],10,10,speedBird,redX,redY,20,20)){
+                  context.fillRect(X[i],Y[i],30,30)
+                  if(areColliding(X[i],Y[i],30,30,redX,redY,20,20)){
+                           X[i] = 10000000000000000
                   }
          }
          
