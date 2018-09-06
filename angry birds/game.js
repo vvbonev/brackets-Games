@@ -2,11 +2,11 @@
 var shoot = false
 var speedBird = new Image 
 var delX = 0, delY = 0
-var background = new Image
-background.scr = "1.png"
+var prase = new Image
+prase.scr = "prascho.jpg"
 speedBird.src = "angry2.jpg"
 var myX = 0, myY = 0;
-var praschovite = [1,2]
+var X = [Math.random() * 780,Math.random() * 780], Y = [Math.random() *580 ,Math.random() *580 ]
 
 function update() {
          if(delX != 0 && delY != 0){
@@ -30,7 +30,17 @@ function update() {
 }
 
 function draw() {
-         context.fillRect(0,0,800,800);
+         for(var i = 0;i < 2;i ++){
+         context.fillStyle = "red"
+                  context.fillRect(X[i],Y[i],10,10)
+                  if(areColliding(X[i],Y[i],10,10,speedBird,redX,redY,20,20)){
+                  }
+         }
+         
+         
+         
+         
+         
          context.drawImage(speedBird,redX,redY,20,20);
          if(delX != 0 && delY != 0){
                   delY+=0.45
@@ -49,12 +59,11 @@ function draw() {
                            delY = 0
                   } 
          }
-};
+}
 
 function keyup(key) {
-    // Show the pressed keycode in the console
     console.log("Pressed", key);
-};
+}
 
 function mouseup() {
          if(!shoot){
@@ -63,4 +72,4 @@ function mouseup() {
                   shoot = true
          }
     console.log("Mouse clicked at", mouseX, mouseY);
-};
+}
