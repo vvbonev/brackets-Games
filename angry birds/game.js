@@ -1,51 +1,66 @@
-﻿var redBird = new Image , redX = 150,redY = 400;
-var speedBird = new Image , speedX = 0 , speedY = 0
-var bombBird = new Image , bombX = 0 , bombY = 0
-var prashka = new Image , prashkaX = 200 , prashkaY = 430
-var shootbuttonpower = NaN , shootbuttonpowerpower = 100
+﻿var redX = 150,redY = 400;
+var shoot = false
+var speedBird = new Image 
 var delX = 0, delY = 0
-prashka.scr = "images.jpg"
-redBird.src = "angry1.jpg"
+var background = new Image
+background.scr = "1.png"
 speedBird.src = "angry2.jpg"
-bombBird.src = "angry3.jpg"
+var myX = 0, myY = 0;
+var praschovite = [1,2]
 
 function update() {
-         if(delX<0){
-                  delX = 0
-         }  
-         if(delY>0){
-                  delY = 0
-         }
-         if(shootbuttonpowerpower > 0){
-                  shootbuttonpowerpower -= 1.25
-         }else{
-                  shootbuttonpower = false
-         }
-};
-
-function draw() {
-         context.fillRect(400,400,100,100)
-         if(shootbuttonpower){
-                  delX  += 0.2
-                  delY  -= 0.1
-                           redX += delX
-                           redY += delY
-         }else{
-                  delX +=0.00000001
-                  delY += 0.1
+         if(delX != 0 && delY != 0){
+                  if(delX > 0){
+                           delX -= 0.03
+                  }else{
+                           delX += 0.03
+                  }
+                  if(redX < 0 || redX > 780){
+                           delX = -delX
+                  }  
+                  if(redY > 580){
+                           delY = -delY + 2
+                           redY = 580
+                  }
                   redX += delX
                   redY += delY
          }
-         context.drawImage(redBird,redX,redY,50,50);
+    myX = myX+(mouseX-myX)/10;
+    myY = myY+(mouseY-myY)/10;
+}
+
+function draw() {
+         context.fillRect(0,0,800,800);
+         context.drawImage(speedBird,redX,redY,20,20);
+         if(delX != 0 && delY != 0){
+                  delY+=0.45
+         }
+         if(delX == 0 && delY == 0){
+                  for(index = 0;index < 70;index += 1){
+                                    if(redX < 0 || redX > 780){
+                                             delX = -delX
+                                    }  
+                                    if(redY > 580){
+                                             delY = -delY + 1
+                                    }
+                           redX += delX
+                           redY += delY
+                           delX = 0
+                           delY = 0
+                  } 
+         }
 };
 
 function keyup(key) {
+    // Show the pressed keycode in the console
     console.log("Pressed", key);
 };
 
 function mouseup() {
-         if(mouseX > 400 && mouseX < 500 && mouseY > 400 && mouseY < 500){
-                  shootbuttonpowerpower = 100
-                  shootbuttonpower = true
+         if(!shoot){
+                  delX = (redX - mouseX) / 9
+                  delY = (redY - mouseY) / 9
+                  shoot = true
          }
+    console.log("Mouse clicked at", mouseX, mouseY);
 };
