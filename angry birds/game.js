@@ -48,12 +48,7 @@ function draw() {
          }
          if(delX == 0 && delY == 0){
                   for(index = 0;index < 70;index += 1){
-                                    if(redX < 0 || redX > 780){
-                                             delX = -delX
-                                    }  
-                                    if(redY > 580){
-                                             delY = -delY + 1
-                                    }
+                           context.fillRect(redX,redY,3,3);
                            redX += delX
                            redY += delY
                            delX = 0
